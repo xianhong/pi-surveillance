@@ -1,0 +1,21 @@
+<html>
+    <head>
+        <title>Pi Remote control</title>
+    </head>
+    <body>
+		<h1>Remote control</h1>
+		<hr>
+		<form method="post" action="{{ url_for('suthankyou') }}">
+ 			<input type="radio" name="message" value="START"> Start<br>
+  			<input type="radio" name="message" value="STOP"> Stop<br>
+			Username: <input type="text" name="username"><br>
+			Password: <input type="password" name="password">
+			
+			<hr>
+			<br>
+		  <input type="submit" value="SUBMIT"/>
+		</form>
+		<a href="/status"><h3>Check Pi Status</h3></a>
+		</body>
+</html>
+ 
