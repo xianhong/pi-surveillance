@@ -9,6 +9,7 @@ import time
 import cv2
 import boto
 import RPi.GPIO as GPIO
+import subprocess
 
 
 def map(x, in_min, in_max, out_min, out_max):
@@ -165,7 +166,7 @@ def surveillance_loop(conf):
 	if conf["show_video"]:cv2.destroyAllWindows()
 	camera.release()
 try:
-
+	subprocess.call(["sudo modprobe bcm2835-v4l2"],shell=True)  # load the v4l2 driver before using OpenCV's video capturing
 	colors = {'red':0xFF0000, 'green':0x00FF00, 'blue':0x0000FF}
 	pins = {'pin_R':11, 'pin_G':12, 'pin_B':13}  # pins is a dict			
 	GPIO.setmode(GPIO.BOARD)       # Numbers GPIOs by physical location
@@ -185,8 +186,8 @@ try:
 	warnings.filterwarnings("ignore")
 	conf = json.load(open("conf.json"))
 	if conf["use_cloud"]:
-		session = boto.connect_s3(conf["cloud_access_key"], conf["cloud_secret_key"], host='object.ecstestdrive.com')
-		cloud_storage_bucket = session.get_bucket(conf["cloud_storage_bucket"])
+		session = boto.connect_s3(conf["cloud"]["access_key"], conf["cloud"]["secret_key"], host=conf["cloud"]["endpoint"])
+		cloud_storage_bucket = session.get_bucket(conf["cloud"]["bucket"])
 		print("[SUCCESS] cloud account linked")
 
 

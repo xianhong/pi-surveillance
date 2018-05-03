@@ -1,9 +1,10 @@
 {
 	"show_video": false,
 	"use_cloud":  false,
-	"cloud_secret_key": "object_storage_secret_key",
-	"cloud_access_key": "object_storage_access_key",
-	"cloud_storage_bucket": "buck_name",
+	"cloud": {"secret_key": "object_storage_secret_key",
+			"access_key": "object_storage_access_key",
+			"endpoint": "object.ecstestdrive.com",
+			"bucket": "buck_name"},
 	"min_upload_seconds": 3.0,
 	"min_motion_frames": 8,
 	"camera_warmup_time": 2.5,
@@ -11,7 +12,7 @@
 	"resolution": [640, 480],
 	"fps": 16,
 	"min_area": 5000,
-	"mqtt": {"broker":"127.0.0.1",
+	"mqtt": {"broker":"broker_ip",
 			"username":"broker_user_id",
 			"password": "broker_user_password"}
 }
